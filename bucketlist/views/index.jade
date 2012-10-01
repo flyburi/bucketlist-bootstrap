@@ -3,3 +3,18 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  #create
+    input(type='text', name='title', id='title', placeholder='What is your dreams in life?')
+    textarea(name='contents', id='contents')
+  #bucketlist
+    ul#lists
+    
+    #accordion
+      h3
+        a(href="#") Section1
+      div 
+        p test
+      h3 
+        a(href="#") Section2
+      div
+        p test2
