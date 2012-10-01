@@ -21,11 +21,10 @@ exports.list = function(req, res) {
     }
     if(result){
       res.json(result.map(function(item) {
-            return { content:item.content, done:item.done, id: item._id.toString() };
+            return { id: item._id.toString(), title:item.title, contents:item.contents, done:item.done  };
         }));
     }
   });
-
 };
 
 exports.create = function(req, res) {
@@ -46,5 +45,23 @@ exports.create = function(req, res) {
       });
     }
   });
+};
 
+exports.del = function(req, res){
+  var id = req.params.id;
+  bucketlist.remove({
+    _id: new Mongolian.ObjectId(req.params.id)
+  });
+  res.send(req.body);
+};
+
+exports.update = function(req, res){
+  bucketlist.update({
+    _id: new Mongolian.ObjectId(req.params.id)}
+    ,{"$set" : {
+      title: req.body.title, 
+      contents : req.body.contents
+     }
+  });
+  res.send(req.body);
 };

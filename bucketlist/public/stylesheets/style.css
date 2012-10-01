@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+button.delButton {
+    float: right;
+}
+
+button.checkButton {
+    float: right;
+}​​

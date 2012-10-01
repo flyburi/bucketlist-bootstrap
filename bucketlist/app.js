@@ -40,6 +40,8 @@ var api = require('./routes/api.js');
 app.get('/', api.index);
 app.post('/create', api.create);
 app.get('/list', api.list);
+app.del('/del/:id', api.del);
+app.put('/update/:id', api.update);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
