@@ -37,7 +37,6 @@ exports.create = function(req, res) {
       throw err;
     }
     if (result) {
-      // res.writeHead(200,result);
       res.json({
         title : result.title,
         contents : result.contents,
@@ -47,21 +46,26 @@ exports.create = function(req, res) {
   });
 };
 
+exports.update = function(req, res){
+  console.log(req.body.contents);
+  bucketlist.update({
+    _id: new Mongolian.ObjectId(req.params.id)}
+    ,{"$set" : {contents : req.body.contents, done: req.body.done}
+  }, function(err, result){
+    if (err) {
+      throw err;
+    }
+    if (result) {
+      res.send(result);
+    }
+  });
+  
+};
+
 exports.del = function(req, res){
   var id = req.params.id;
   bucketlist.remove({
     _id: new Mongolian.ObjectId(req.params.id)
-  });
-  res.send(req.body);
-};
-
-exports.update = function(req, res){
-  bucketlist.update({
-    _id: new Mongolian.ObjectId(req.params.id)}
-    ,{"$set" : {
-      title: req.body.title, 
-      contents : req.body.contents
-     }
   });
   res.send(req.body);
 };
