@@ -21,7 +21,11 @@ exports.list = function(req, res) {
     }
     if(result){
       res.json(result.map(function(item) {
-            return { id: item._id.toString(), title:item.title, contents:item.contents, done:item.done  };
+            return { 
+              id: item._id.toString(), 
+              title:item.title, 
+              contents:item.contents, 
+              done:item.done  };
         }));
     }
   });
@@ -59,7 +63,6 @@ exports.update = function(req, res){
       res.send(result);
     }
   });
-  
 };
 
 exports.del = function(req, res){

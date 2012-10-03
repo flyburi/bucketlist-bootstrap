@@ -20,5 +20,7 @@ button.editButton {
 button.ui-button-icon-only {
     width: 1.2em;
 }
-
-.ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+.messagebox{
+	background-color: #eedc94;
+	text-align:center;
+}

@@ -15,7 +15,7 @@ app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
-  app.use(express.logger('dev'));
+  app.use(express.logger('development'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   //브라우저가 DELETE 같은 메소드는 이해하지 못하기 때문입니다만, 관례적인 방식으로 이런 문제를 회피할 수 있습니다. 
@@ -27,7 +27,6 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.logger());
   app.use(express.errorHandler({ dumpExceptions : true, showStack : true }));
 });
 
@@ -35,12 +34,14 @@ app.configure('production', function() {
   app.use(express.errorHandler());
 });
 
+var index = require('./routes/index.js');
+app.get('/', index.index);
+
 var api = require('./routes/api.js');
-app.get('/', api.index);
 app.post('/create', api.create);
 app.get('/list', api.list);
-app.del('/del/:id', api.del);
 app.put('/update/:id', api.update);
+app.del('/del/:id', api.del);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

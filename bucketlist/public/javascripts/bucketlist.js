@@ -9,8 +9,7 @@ $(function(){
   getBucketList = function(){
     $.getJSON('list', function(data){
       $.each(data, function(key,val){
-//        ui(val);
-        $("#accordion").append('<h3 id="'+val.id +'"><a id="' + val.id +'">' + val.title + '<button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
+        $("#accordion").append('<h3 class="demoHeaders" id="'+val.id +'"><a id="' + val.id +'">' + val.title + '<button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
         $("#accordion").append('</a></h3>');
         $("#accordion").append('<div contenteditable="true" id="'+val.id + '" class= ' + "'contentDiv'"+'><p>' + val.contents + '</p></div>');
       });
@@ -18,13 +17,6 @@ $(function(){
       initialize();
     });
   },
-
-  /*
-  ui = function(result){
-    $("#accordion").append('<h3 id="'+result.id +'"><a id="' + result.id +'">' + result.title + '<button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +'/></a></h3>');
-    $("#accordion").append('<div contenteditable="true" id="'+result.id+'" class= ' + "'contentDiv'"+'><div><button type=' + "'button'" + ' class= ' + "'checkButton'" +'>menu</button></div><p>' + result.contents + '</p></div>')
-  },
-  */
   
   createOnEnter = function(){
     var _data = {
@@ -37,7 +29,6 @@ $(function(){
       type: "POST",
       data: _data
     }).done(function(result){
-//    ui(result);
       $("#accordion").append('<h3 id="'+result.id +'"><a id="' + result.id +'">' + result.title + '<button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +'/><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
       $("#accordion").append('</a></h3>');
       $("#accordion").append('<div contenteditable="true" id="'+result.id+'" class= ' + "'contentDiv'"+'><p>' + result.contents + '</p></div>');
@@ -111,13 +102,10 @@ $(function(){
     $("button.editButton").click(function() {
         alert("Do you really want to update this?");
         updateItem(this.id);
-//        return false;
     });
     $("button.editButton").bind("click", function(e) {
         e.stopPropagation();
     });
-    
-    
     
     
     $("button.checkButton").button({
