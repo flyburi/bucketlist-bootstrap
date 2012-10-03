@@ -1,8 +1,8 @@
 /* The API Controller */
 
-/*
- var repo = require('../repository.js');
- */
+//TODO 
+//var repo = require('../repository.js');
+
 var Mongolian = require('mongolian')
   , server = new Mongolian
   , db = server.db('bucketdb')
@@ -15,6 +15,9 @@ exports.index = function(req, res) {
 };
 
 exports.list = function(req, res) {
+  var self = this;
+  self.items = new Array();
+  
   bucketlist.find().toArray(function(err, result){
     if(err) {
       throw err;
@@ -27,6 +30,7 @@ exports.list = function(req, res) {
               contents:item.contents, 
               done:item.done  };
         }));
+      
     }
   });
 };
@@ -51,7 +55,6 @@ exports.create = function(req, res) {
 };
 
 exports.update = function(req, res){
-  console.log(req.body.contents);
   bucketlist.update({
     _id: new Mongolian.ObjectId(req.params.id)}
     ,{"$set" : {contents : req.body.contents, done: req.body.done}

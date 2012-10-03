@@ -9,10 +9,12 @@ $(function(){
   getBucketList = function(){
     $.getJSON('list', function(data){
       $.each(data, function(key,val){
-        $("#accordion").append('<h3 class="demoHeaders" id="'+val.id +'"><a id="' + val.id +'">' + val.title + '<button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
+        //TODO Refactoring UI or extract Method
+        $("#accordion").append('<h3 id="'+val.id +'"><a>' + val.title + '<button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + val.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
         $("#accordion").append('</a></h3>');
         $("#accordion").append('<div contenteditable="true" id="'+val.id + '" class= ' + "'contentDiv'"+'><p>' + val.contents + '</p></div>');
       });
+      
       $("#accordion" ).accordion(accordionOpts);
       initialize();
     });
@@ -23,22 +25,23 @@ $(function(){
         title : $('#title').val(),
         contents : $('#contents').val()
     };
-    var self = this;
+    
     $.ajax({
       url: '/create',
       type: "POST",
       data: _data
     }).done(function(result){
-      $("#accordion").append('<h3 id="'+result.id +'"><a id="' + result.id +'">' + result.title + '<button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +'/><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
+      //TODO Refactoring UI or extract Method
+      $("#accordion").append('<h3 id="'+result.id +'"><a>' + result.title + '<button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'delButton'" +'/><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'editButton'" +' /><button id="' + result.id + '"type=' + "'button'" +  'class= ' + "'checkButton'" +' />');
       $("#accordion").append('</a></h3>');
       $("#accordion").append('<div contenteditable="true" id="'+result.id+'" class= ' + "'contentDiv'"+'><p>' + result.contents + '</p></div>');
+      
       $("#accordion").accordion('destroy').accordion(accordionOpts);
       initialize();
     });
   },
   
   deleteItem = function(id){
-    var self = this;
     $.ajax({
       url: '/del/' + id,
       type: "DELETE"
@@ -71,7 +74,7 @@ $(function(){
   getBucketList();
   
   initialize  = function(){
-    
+    //Initial Input and Textarea
     $('#title').val(""),
     $('#contents').val(""),
     
@@ -122,14 +125,5 @@ $(function(){
     $("button.checkButton").bind("click", function(e) {
         e.stopPropagation();
     });
-    
-    
-    $("div.contentDiv").dblclick(function() {
-      alert("div click");
-    });
-    $("div.contentDiv").bind("dblclick", function(e) {
-        e.stopPropagation();
-    });
-    
   };
 });
