@@ -38,6 +38,8 @@ var index = require('./routes/index.js');
 app.get('/', index.index);
 
 var api = require('./routes/api.js');
+app.post('/signup', api.signup);
+app.post('/signin', api.signin);
 app.post('/create', api.create);
 app.get('/list', api.list);
 app.put('/update/:id', api.update);

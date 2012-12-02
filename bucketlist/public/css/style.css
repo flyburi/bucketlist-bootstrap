@@ -1,0 +1,104 @@
+body { padding-top: 60px; padding-bottom: 40px; }
+
+textarea.dreamContents { width: 530px; }
+
+.hiddenDiv { display:none; }
+
+a {
+  color: #00B7FF;
+}
+
+button.delButton {
+    float: right;
+}
+
+button.checkButton {
+    float: right;
+}​​
+button.editButton {
+    float: right;
+}​​
+button.ui-button-icon-only {
+    width: 1.2em;
+}
+.messagebox{
+	background-color:  #F7F7F7;
+	text-align:center;
+}
+#footer {
+	background-color: #111111;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
+    height: 45px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100000;
+}
+.hero-unit { 
+	background-color: #FFFFFF;
+}
+
+#profileDiv {
+	float:right;
+}
+.copyright{
+	float:right;
+}
+#writeForm {
+	float:left;
+	width:40%;
+}
+#bucketList{
+	float:right;
+	width:40%;
+	height:500px;
+	overflow-y:scroll;
+	margin: 50px;
+}
+#list {
+	float:right;
+}
+#bucketList ul li {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 12px 10px 12px 10px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+#bucketList ul li input[type="checkbox"] {
+    cursor: pointer;
+    display: inline-block;
+    left: -16px;
+    margin: 0 0 0 -17px;
+    position: relative;
+}
+
+#bucketList ul {
+    list-style: none outside none;
+}
+
+#bucketList ul li:hover a.delete {
+    opacity: 0.9;
+}
+
+#bucketList ul li a.delete {
+    -moz-transition: all 0.4s ease 0s;
+    background-color: #B02929;
+    border-radius: 50% 50% 50% 50%;
+    color: #FFFFFF;
+    font-size: 10px;
+    height: 14px;
+    line-height: 14px;
+    margin-top: -7px;
+    opacity: 0;
+    position: absolute;
+    right: 20px;
+    text-align: center;
+    text-decoration: none !important;
+    top: 50%;
+    width: 14px;
+}
+#bucketList ul li.done {
+    text-decoration: line-through;
+}

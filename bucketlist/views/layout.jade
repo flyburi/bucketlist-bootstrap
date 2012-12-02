@@ -1,12 +1,28 @@
 doctype 5
+//if lt IE 7
+  html(class="no-js lt-ie9 lt-ie8 lt-ie7", lang="en")
+//if IE 7
+  html(class="no-js lt-ie9 lt-ie8", lang="en")
+//if IE 8
+  html(class="no-js lt-ie9", lang="en")
+// [if gt IE 8] <!
+  html(class="no-js", lang="en")
+// <![endif]
+
 html
   head
+    meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1; charset=UTF-8")
+    meta(name="viewport", content="width=device-width");
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/jquery-ui-1.8.24.custom.css')
-    script(type='text/javascript', src='/javascripts/jquery-1.8.0.min.js')
-    script(type='text/javascript', src='/javascripts/jquery-ui-1.8.24.custom.min.js')
-    script(type='text/javascript', src='/javascripts/bucketlist.js')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    style(type='text/css')
+      body { padding-top: 60px; padding-bottom: 40px; }
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/css/style.css')
     
+    script(type='text/javascript', src='/js/modernizr-2.6.1-respond-1.1.0.min.js')
+    
+
   body
+    
     block content

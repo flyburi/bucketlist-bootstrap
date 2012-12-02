@@ -6,19 +6,59 @@
 var Mongolian = require('mongolian')
   , server = new Mongolian
   , db = server.db('bucketdb')
-  , bucketlist = db.collection('bucketlist');
+  , bucketlist = db.collection('bucketlist')
+  , user = db.collection('user');
 
 exports.index = function(req, res) {
-  res.render('index', {
-    title : 'Bucket List'
+  res.render('index');
+};
+
+exports.signup = function(req, res){
+  user.insert({
+    email:req.body.email,
+    password: req.body.password
+  }, function(err, result){
+    if(err) {
+       throw err;
+    }
+    if(result){
+      console.log(result);
+      res.json({
+        email: result.email,
+        password : result.password
+      });
+    }
+  });
+};
+
+exports.signin = function(req, res){
+  user.findOne({
+    email: req.body.email,
+    password: req.body.password
+  }, function(err, result){
+    if(err){
+      console.log('err cant find');
+      throw err;
+    }
+    if(result){
+      req.session.user = email;
+      res.json({
+        //email: result.email,
+        //password : result.password,
+        user : email
+      });
+    }
   });
 };
 
 exports.list = function(req, res) {
+  if(req.session.user != undefined){
+  alert("logined : " + req.session.user);
+  }
   var self = this;
   self.items = new Array();
   
-  bucketlist.find().toArray(function(err, result){
+  bucketlist.find().sort({createdAt:-1}).toArray(function(err, result){
     if(err) {
       throw err;
     }
@@ -27,7 +67,10 @@ exports.list = function(req, res) {
             return { 
               id: item._id.toString(), 
               title:item.title, 
-              contents:item.contents, 
+              contents:item.contents,
+              createdAt: item.createdAt,
+              updatedAt: item.updatedAt,
+              checkPrivate : item.checkPrivate,
               done:item.done  };
         }));
       
@@ -39,6 +82,10 @@ exports.create = function(req, res) {
   bucketlist.insert({
     title : req.body.title,
     contents : req.body.contents,
+    tags: req.body.tags,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    checkPrivate : req.body.checkPrivate,
     done : false
   }, function(err, result) {
     if (err) {
@@ -48,6 +95,10 @@ exports.create = function(req, res) {
       res.json({
         title : result.title,
         contents : result.contents,
+        tags: result.tags,
+        createdAt: result.createdAt,
+        updatedAt: result.updatedAt,
+        checkPrivate : result.checkPrivate,
         id : result._id.toString()
       });
     }
@@ -57,7 +108,7 @@ exports.create = function(req, res) {
 exports.update = function(req, res){
   bucketlist.update({
     _id: new Mongolian.ObjectId(req.params.id)}
-    ,{"$set" : {contents : req.body.contents, done: req.body.done}
+    ,{"$set" : {contents : req.body.contents, done: req.body.done, updatedAt: new Date()}
   }, function(err, result){
     if (err) {
       throw err;
@@ -75,3 +126,9 @@ exports.del = function(req, res){
   });
   res.send(req.body);
 };
+
+exports.logout = function(req, res){
+  req.session.user = undefined;
+  res.redirect('/');
+};
+

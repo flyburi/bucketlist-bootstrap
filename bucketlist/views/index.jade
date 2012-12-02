@@ -1,13 +1,80 @@
 extends layout
 
 block content
-  h1= title
-  div(class="alert-message block-message warning")
-    p Welcome to #{title}
-    #create(class="messagebox")
-      input(type='text', name='title', id='title', placeholder='What is your dreams in life?', size='50')
-      p
-        textarea(name='contents', id='contents', placeholder='How to make your dreams come true?', rows='5', cols='80')
-      button(id='createBtn') make a dream
-      
-  #accordion
+  div(class="navbar navbar-inverse navbar-fixed-top")
+    div(class="navbar-inner")
+      div(class="container")
+        a(class="brand", href="#") Bucket List
+        div(class="nav-collapse collapse")
+          ul(class="nav")
+            li(class="active")
+              a(href="/") Home
+            li
+              a(id="listLink", href="#") List
+            li
+              a(href="/tags") Tags
+            li
+              a(href="#about") About
+            li
+              a(href="#contact") Contact
+            li(class="dropdown")
+              a(href="#", class="dropdown-toggle", data-toggle="dropdown") Dropdown
+                b(class="caret")
+              ul(class="dropdown-menu")
+                li
+                  a(href="#") Action
+                li
+                  a(href="#") Another action
+                li
+                  a(href="#") Something else here
+          form(id="loginForm", class="navbar-form pull-right")
+            input(id="email", class="span2", type="text", placeholder="Email")
+            input(id="password", class="span2", type="password", placeholder="Password")
+            button(id="signinBtn", type="button", class="btn") Sign in
+            button(id="signupBtn", type="button", class="btn") Sign up
+          div(id="profileDiv") 
+    
+    div(id="mainContainer", class="container", width="90%")
+      div(id="writeForm", class="hero-unit", width="45%")
+        h1 Bucket list
+        p 죽기전에 꼭 하고 싶은 일들 Before I die, I want to...
+        input(id="title", class="input-xxlarge", type="text", placeholder="What is your dreams in life?")
+        input(id="checkPrivate", type="checkbox") 
+        span Private
+        br
+        p
+          textarea(name='contents', id='contents', placeholder='How to make your dreams come true?', rows='5', cols='300', class='dreamContents')
+        p
+          input(id="tag", type="text", placeholder="tag #", class="input-small")
+          
+        p
+          a(id="createBtn", class="btn btn-primary btn-large") Make a Dream &raquo;
+          
+      div(id="bucketList", class="container")
+        h1(class="") My Bucket List
+        ul(id="todos")
+    
+    div(id="list", class="container")
+      table(class="table table-hover")
+        thead
+          tr
+            th 제목 
+            th 작성자 
+        tbody
+          tr
+            td asdf
+            td ggg
+    
+    div(id="tagsContainer", class="container hiddenDiv")
+      p test2      
+    
+          
+    footer(id="footer")
+      div(class="wrap")
+        p(class="copyright") &copy; flyburi 2012
+
+    script(type='text/javascript', src='/js/jquery-1.8.2.js')
+    script(type='text/javascript', src='/js/jquery-ui-1.8.24.custom.min.js')
+    script(type='text/javascript', src='/js/bootstrap.js')
+    script(type='text/javascript', src='/js/bucketlist.js')
+          
