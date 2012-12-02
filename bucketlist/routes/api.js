@@ -41,20 +41,15 @@ exports.signin = function(req, res){
       throw err;
     }
     if(result){
-      req.session.user = email;
       res.json({
-        //email: result.email,
-        //password : result.password,
-        user : email
+        email: result.email,
+        password : result.password,
       });
     }
   });
 };
 
 exports.list = function(req, res) {
-  if(req.session.user != undefined){
-  alert("logined : " + req.session.user);
-  }
   var self = this;
   self.items = new Array();
   
@@ -127,8 +122,4 @@ exports.del = function(req, res){
   res.send(req.body);
 };
 
-exports.logout = function(req, res){
-  req.session.user = undefined;
-  res.redirect('/');
-};
 

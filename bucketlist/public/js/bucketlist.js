@@ -92,7 +92,6 @@ $(function(){
               '<p class="hiddenDiv">'+val.contents+'</p>' +
               '</li>');
         }else{
-//        console.log("done : " +val.done);
           var item = $('<li id="'+val.id+'">'+
             '<input type="checkbox" />'+val.title+
             '<a href="#" class="delete">✖</a>'+
@@ -200,6 +199,7 @@ $(function(){
   initialize  = function(){
     getBucketList();
 
+    /*
     $("button.delButton").button({
       icons: {
           primary: "ui-icon-trash"
@@ -247,6 +247,7 @@ $(function(){
     $("button.checkButton").bind("click", function(e) {
         e.stopPropagation();
     });
+    */
   };
 });
 
